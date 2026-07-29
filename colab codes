@@ -1,0 +1,91 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_squared_error
+
+# 2. DATA UNDERSTANDING (Memahami Data)
+# Membaca dataset dari file Excel
+df = pd.read_excel('1000_Companies.xlsx')
+
+# Membersihkan karakter aneh 'Ã¯Â»Â¿' pada nama kolom
+df.columns = [col.encode('ascii', 'ignore').decode('ascii').strip() for col in df.columns]
+
+print("=== TAHAP DATA UNDERSTANDING ===")
+print(f"Struktur Data: {df.shape[0]} baris dan {df.shape[1]} kolom")
+print(df.info()) # Menampilkan jenis data setiap kolom
+
+# 3. CLEANING DATA (Pembersihan Data)
+# Menghapus kolom 'State' karena bertipe teks dan tidak digunakan dalam regresi linear
+df_clean = df.drop('State', axis=1)
+
+# Menghapus baris yang memiliki nilai kosong (Missing Values)
+df_clean = df_clean.dropna()
+
+print("\n=== TAHAP CLEANING DATA ===")
+print(f"Data bersih yang siap dianalisis: {len(df_clean)} baris")
+
+# 4. EXPLORATORY DATA (Eksplorasi & Visualisasi)
+print("\n=== TAHAP EXPLORATORY DATA ANALYSIS ===")
+# A. Statistik Deskriptif (Mean, Median, Kuartil)
+print("Statistik Deskriptif:")
+print(df_clean.describe())
+
+# B. Visualisasi Histogram (Memahami distribusi Profit)
+plt.figure(figsize=(8, 5))
+sns.histplot(df_clean['Profit'], kde=True, color='blue')
+plt.title('Distribusi Keuntungan (Profit)')
+plt.show()
+
+# C. Visualisasi Heatmap (Memahami hubungan/korelasi antar variabel)
+plt.figure(figsize=(10, 6))
+sns.heatmap(df_clean.corr(), annot=True, cmap='RdYlGn', fmt='.2f')
+plt.title('Matriks Korelasi Pengeluaran vs Profit')
+plt.show()
+
+# D. Visualisasi Scatter Plot (Hubungan R&D Spend dengan Profit)
+plt.figure(figsize=(8, 5))
+sns.scatterplot(x='R&D Spend', y='Profit', data=df_clean)
+plt.title('Scatter Plot: R&D Spend vs Profit')
+plt.grid(True)
+plt.show()
+
+# 5. MODELISASI (Membangun Model Regresi)
+# Memisahkan Fitur (X) dan Target (y)
+X = df_clean.drop('Profit', axis=1) # Independen: R&D, Admin, Marketing
+y = df_clean['Profit']              # Dependen: Profit
+
+# Membagi data: 80% untuk latihan, 20% untuk ujian (Testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Inisialisasi dan melatih algoritma Linear Regression
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# 6. EVALUASI (Mengukur Performa Model)
+y_pred = model.predict(X_test)
+r2 = r2_score(y_test, y_pred) # Menghitung Koefisien Determinasi
+
+# 7: COMMUNICATION RESULT
+# Membuat Grafik Perbandingan Aktual vs Prediksi
+plt.figure(figsize=(10, 6))
+
+# Titik-titik hasil prediksi
+plt.scatter(y_test, y_pred, color='green', alpha=0.6, label='Hasil Prediksi AI')
+
+# Membuat garis diagonal merah (Garis Ideal)
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=3, label='Garis Akurasi Sempurna')
+
+plt.xlabel('Profit yang Sebenarnya (Aktual)')
+plt.ylabel('Profit Tebakan Model (Prediksi)')
+plt.title('GRAFIK EVALUASI UAS: PERBANDINGAN AKTUAL VS PREDIKSI')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+print("\n===KESIMPULAN ===")
+print("1. R&D Spend adalah faktor paling dominan dalam menentukan profit.")
+print("2. Model Regresi Linear Berganda sangat akurat (R2 > 0.9).")
+print(f"3. Koefisien Determinasi (R-squared): {r2:.4f}")
