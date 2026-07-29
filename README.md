@@ -80,12 +80,6 @@ The model demonstrates excellent predictive performance, indicating that R&D exp
 
 ---
 
-## 📉 Actual vs Predicted
-
-![Actual vs Predicted](images/actual_vs_predicted.png)
-
----
-
 ## 💡 Key Insights
 
 - R&D Spend has the strongest positive relationship with profit.
