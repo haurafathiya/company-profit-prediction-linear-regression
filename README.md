@@ -46,7 +46,7 @@ The analysis includes:
 
 ### Profit Distribution
 
-![Profit Distribution](images/distribusi keuntungan (profit).png)
+![Profit Distribution](distribusi keuntungan (profit).png)
 
 ### Correlation Heatmap
 
