@@ -46,16 +46,16 @@ The analysis includes:
 
 ### Profit Distribution
 
-![Profit Distribution](images/profit_distribution.png)
+![Profit Distribution](images/distribusi keuntungan (profit).png)
 
 ### Correlation Heatmap
 
-![Correlation Heatmap](images/correlation_heatmap.png)
+![Correlation Heatmap](images/matriks korelasi pengeluaran vs profit.png)
 
 ### R&D Spend vs Profit
 
-![Scatter Plot](images/rd_spend_vs_profit.png)
-
+![Scatter Plot 1](images/scatter plot r&d spend vs profit.png)
+![Scatter Plot 2](images/grafik evaluasi perbandingan aktual vs prediksi.png)
 ---
 
 ## 🤖 Machine Learning Model
