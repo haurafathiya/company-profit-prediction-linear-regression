@@ -45,17 +45,14 @@ The analysis includes:
 ## 📊 Exploratory Data Analysis
 
 ### Profit Distribution
-
-![Profit Distribution](distribusi keuntungan (profit).png)
+Distribusi Keuntungan (Profit)
 
 ### Correlation Heatmap
-
-![Correlation Heatmap](images/matriks korelasi pengeluaran vs profit.png)
+Matriks Korelasi Pengeluaran vs Profit
 
 ### R&D Spend vs Profit
-
-![Scatter Plot 1](images/scatter plot r&d spend vs profit.png)
-![Scatter Plot 2](images/grafik evaluasi perbandingan aktual vs prediksi.png)
+R&D Spend vs Profit
+Grafik Evaluasi Perbandingan Aktual vs Prediksi
 ---
 
 ## 🤖 Machine Learning Model
